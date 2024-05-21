@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Impact of Climate Changes on Plants Coverage</title>
+<title>Climate Changes Influence to Plants Coverage</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,8 +103,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Impact of Climate Changes on Plants Coverage</h1>
-<p class="subtitle lead">Ecosystem Construction of Southeastern Utah Group National Parks</p>
+<h1 class="title">Climate Changes Influence to Plants Coverage</h1>
+<p class="subtitle lead">Ecosystem alternation of Vegetation in Southeastern Utah Group National Parks</p>
 </div>
 
 
@@ -123,11 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>As</p>
+<p>Climate change, which was proposed at the begining of the 21th century, keeps being a hot topic in the world. It not only influences the ecosystems dramatically, but also affects the human society and property such as the National Parks. Although the National Parks are protected by the government, its fragile ecosystem still facing the threat of water and soil erosion. In this project, we are going to monitor the historical changes of the covered area, afforesting degree, plants distribution, drought condition, percipitation and temperature in summer and winter. Furthermore, we plan to evaluate the furture prediction of the vegetation cover in the National Parks based on historical data. The goal is to find out the relationship between the climate change and the vegetation coverage distribution in the National Parks to provide the government with the accurate information to reasonably adjust the afforesting plan to protect the National Parks.</p>
 </section>
 <section id="data-overview" class="level2">
 <h2 class="anchored" data-anchor-id="data-overview">Data Overview</h2>
-<div id="66b527a3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="1">
+<div id="66b527a3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <div>
 
@@ -453,12 +453,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="48f3b80d" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="2">
+<div id="48f3b80d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div>
 
@@ -768,7 +768,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Historical Environment Conditions</h1>
 <section id="plants-coverage-area" class="level2">
 <h2 class="anchored" data-anchor-id="plants-coverage-area">Plants Coverage Area</h2>
-<div id="5655835f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="3">
+<div id="5655835f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The plant coverage depends on the bare ground percentage coverage</span></span>
@@ -776,7 +776,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coverage_degree <span class="op">=</span> hist.groupby([<span class="st">'long'</span>,<span class="st">'lat'</span>,<span class="st">'year'</span>])[<span class="st">'coverage_degree'</span>].mean().reset_index()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>coverage_degree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div>
 
@@ -877,7 +877,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="72276e2f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="4">
+<div id="72276e2f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Citation: https://plotly.com/python/mapbox-layers/</span></span>
@@ -902,7 +902,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="forest_degree.html" width="120%" height="600px">
 </iframe>
-<div id="c4f8afa0" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="5">
+<div id="c4f8afa0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plants <span class="op">=</span> hist.groupby([<span class="st">'long'</span>,<span class="st">'lat'</span>,<span class="st">'year'</span>])[[<span class="st">'treecanopy'</span>,<span class="st">'Herb'</span>,<span class="st">'Litter'</span>,<span class="st">'Shrub'</span>,<span class="st">'Ann_Herb'</span>]].mean().reset_index()</span>
@@ -928,7 +928,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="plants_coverage.html" width="120%" height="600px">
 </iframe>
-<div id="f7820578" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="6">
+<div id="f7820578" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Citation: https://plotly.com/python/mapbox-county-choropleth/</span></span>
@@ -990,7 +990,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="drought-condition" class="level2">
 <h2 class="anchored" data-anchor-id="drought-condition">Drought Condition</h2>
-<div id="7825a9e7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="7">
+<div id="7825a9e7" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The drought term was defined by the dry soil dats, evaporation and extreme short term dry stress in summer</span></span>
@@ -1000,7 +1000,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>drought_severty.fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>drought_severty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 <div>
 
@@ -1125,7 +1125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="abe0e02c" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="8">
+<div id="abe0e02c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(hist, geometry<span class="op">=</span>gpd.points_from_xy(hist.<span class="bu">long</span>, hist.lat))</span>
@@ -1153,7 +1153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d92e5aa1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="9">
+<div id="d92e5aa1" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>figure4 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1176,7 +1176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="drought_severity.html" width="120%" height="600px">
 </iframe>
-<div id="f5625871" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="10">
+<div id="f5625871" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>figure5 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1199,7 +1199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_evaporation.html" width="120%" height="600px">
 </iframe>
-<div id="331beced" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="11">
+<div id="331beced" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>figure6 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1224,13 +1224,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="percipitation-and-temperature" class="level2">
 <h2 class="anchored" data-anchor-id="percipitation-and-temperature">Percipitation and Temperature</h2>
-<div id="280cf9c1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="12">
+<div id="280cf9c1" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ppt <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'PPT_Summer'</span>, <span class="st">'T_Summer'</span>, <span class="st">'PPT_Winter'</span>, <span class="st">'T_Winter'</span>, <span class="st">'FrostDays_Winter'</span>]].mean().reset_index()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ppt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 <div>
 
@@ -1381,7 +1381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="summer" class="level3">
 <h3 class="anchored" data-anchor-id="summer">Summer</h3>
-<div id="9cf8a64e" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="13">
+<div id="9cf8a64e" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>figure7 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1404,7 +1404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_precipitation.html" width="120%" height="600px">
 </iframe>
-<div id="44e17d58" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="14">
+<div id="44e17d58" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>figure8 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1429,7 +1429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="winter" class="level3">
 <h3 class="anchored" data-anchor-id="winter">Winter</h3>
-<div id="6f232782" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="15">
+<div id="6f232782" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>figure9 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1452,7 +1452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="winter_precipitation.html" width="120%" height="600px">
 </iframe>
-<div id="6d9ca058" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="16">
+<div id="6d9ca058" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>figure10 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1474,7 +1474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="winter_temperature.html" width="120%" height="600px">
 </iframe>
-<div id="4550bedb" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="17">
+<div id="4550bedb" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>figure11 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1502,14 +1502,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="water-capacity-in-soil" class="level2">
 <h2 class="anchored" data-anchor-id="water-capacity-in-soil">Water Capacity in Soil</h2>
-<div id="c1cf95eb" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="18">
+<div id="c1cf95eb" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>vwc <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'VWC_Spring_whole'</span>, <span class="st">'VWC_Summer_whole'</span>, <span class="st">'VWC_Fall_whole'</span>, <span class="st">'VWC_Winter_whole'</span>]].mean().reset_index()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>vwc[<span class="st">'vwc_total'</span>] <span class="op">=</span> vwc[<span class="st">'VWC_Spring_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Summer_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Fall_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Winter_whole'</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>vwc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 <div>
 
@@ -1658,7 +1658,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="6d7797a3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}" data-execution_count="19">
+<div id="6d7797a3" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>figure12 <span class="op">=</span> px.scatter_mapbox(vwc,</span>

@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="map_files/libs/clipboard/clipboard.min.js"></script>
@@ -71,6 +91,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -87,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#historical-environment-conditions" id="toc-historical-environment-conditions" class="nav-link" data-scroll-target="#historical-environment-conditions">Historical Environment Conditions</a>
   <ul class="collapse">
   <li><a href="#plants-coverage-area" id="toc-plants-coverage-area" class="nav-link" data-scroll-target="#plants-coverage-area">Plants Coverage Area</a></li>
-  <li><a href="#drought-condition" id="toc-drought-condition" class="nav-link" data-scroll-target="#drought-condition">Drought Condition</a></li>
+  <li><a href="#drought-condition-in-summer" id="toc-drought-condition-in-summer" class="nav-link" data-scroll-target="#drought-condition-in-summer">Drought Condition in Summer</a></li>
   <li><a href="#percipitation-and-temperature" id="toc-percipitation-and-temperature" class="nav-link" data-scroll-target="#percipitation-and-temperature">Percipitation and Temperature</a>
   <ul class="collapse">
   <li><a href="#summer" id="toc-summer" class="nav-link" data-scroll-target="#summer">Summer</a></li>
@@ -95,7 +144,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#water-capacity-in-soil" id="toc-water-capacity-in-soil" class="nav-link" data-scroll-target="#water-capacity-in-soil">Water Capacity in Soil</a></li>
   </ul></li>
-  <li><a href="#future-predictions" id="toc-future-predictions" class="nav-link" data-scroll-target="#future-predictions">Future Predictions</a></li>
+  <li><a href="#future-predictions" id="toc-future-predictions" class="nav-link" data-scroll-target="#future-predictions">Future Predictions</a>
+  <ul class="collapse">
+  <li><a href="#plants-coverage-area-1" id="toc-plants-coverage-area-1" class="nav-link" data-scroll-target="#plants-coverage-area-1">Plants Coverage Area</a></li>
+  <li><a href="#drought-condition-in-summer-1" id="toc-drought-condition-in-summer-1" class="nav-link" data-scroll-target="#drought-condition-in-summer-1">Drought Condition in Summer</a></li>
+  <li><a href="#water-capacity-in-soil-1" id="toc-water-capacity-in-soil-1" class="nav-link" data-scroll-target="#water-capacity-in-soil-1">Water Capacity in Soil</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -127,7 +182,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-overview" class="level2">
 <h2 class="anchored" data-anchor-id="data-overview">Data Overview</h2>
-<div id="66b527a3" class="cell" data-execution_count="2">
+<p>In this project, we are going to use the following datasets:</p>
+<ol type="1">
+<li><p><strong>NABR_historic.csv</strong>: Contains the solid data of the vegetation coverage and the basic environment information in the National Parks from 1980 to 2018. According to this data, we could understand the ecosystem and environmental changes of the vegetation coverage in the National Parks which is the key factor to evaluate the climate change influence on the National Parks.</p></li>
+<li><p><strong>nearterm_data_2020-2024.csv</strong>: Based on the historical data, the researchers predict the future ecosystem factors in the National Parks from 2020 to 2024 according to different models. By exploring this data, we could make rational recommendations to the local government to adjust the protection plan to the Southeastern Utah Group National Parks. <span class="citation" data-cites="hartsell2022climate">(<a href="#ref-hartsell2022climate" role="doc-biblioref">Hartsell, Schlaepfer, and Bradford 2022</a>)</span></p></li>
+</ol>
+<div id="66b527a3" class="cell" data-execution_count="46">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -148,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <div>
 <div>
 
@@ -453,12 +513,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="48f3b80d" class="cell" data-execution_count="3">
+<div id="48f3b80d" class="cell" data-execution_count="47">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="47">
 <div>
 <div>
 
@@ -768,7 +828,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Historical Environment Conditions</h1>
 <section id="plants-coverage-area" class="level2">
 <h2 class="anchored" data-anchor-id="plants-coverage-area">Plants Coverage Area</h2>
-<div id="5655835f" class="cell" data-execution_count="4">
+<div id="5655835f" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The plant coverage depends on the bare ground percentage coverage</span></span>
@@ -776,7 +836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coverage_degree <span class="op">=</span> hist.groupby([<span class="st">'long'</span>,<span class="st">'lat'</span>,<span class="st">'year'</span>])[<span class="st">'coverage_degree'</span>].mean().reset_index()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>coverage_degree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="48">
 <div>
 <div>
 
@@ -877,7 +937,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="72276e2f" class="cell" data-execution_count="5">
+<div id="72276e2f" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Citation: https://plotly.com/python/mapbox-layers/</span></span>
@@ -885,24 +945,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> px.scatter_mapbox(coverage_degree, </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                     lat<span class="op">=</span><span class="st">'lat'</span>, </span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                     lon<span class="op">=</span><span class="st">'long'</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                     color<span class="op">=</span><span class="st">'coverage_degree'</span>, </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                     size<span class="op">=</span><span class="st">'coverage_degree'</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                     animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                     color<span class="op">=</span><span class="st">'coverage_degree'</span>,   <span class="co">## use the coverage degree as standard of color</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                     size<span class="op">=</span><span class="st">'coverage_degree'</span>,    <span class="co">## use the coverage degree as standard of size</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                     animation_frame<span class="op">=</span><span class="st">'year'</span>,    <span class="co">## create time slider</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                     title<span class="op">=</span><span class="st">'Covered Soil Percentage Over Time'</span>,</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                     labels<span class="op">=</span>{<span class="st">'coverage_degree'</span>: <span class="st">'Coverage (%)'</span>},</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                     color_continuous_scale<span class="op">=</span><span class="st">'RdYlGn'</span>)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>fig1.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                   width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">700</span>,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                   mapbox <span class="op">=</span> <span class="bu">dict</span>(zoom <span class="op">=</span> <span class="fl">11.8</span>),</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                   title <span class="op">=</span> <span class="bu">dict</span>(x <span class="op">=</span> <span class="fl">0.5</span>, xanchor <span class="op">=</span> <span class="st">'center'</span>, font <span class="op">=</span> <span class="bu">dict</span>(size <span class="op">=</span> <span class="dv">18</span>)))</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>pio.write_html(fig1, <span class="bu">file</span><span class="op">=</span><span class="st">'forest_degree.html'</span>, auto_open<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>fig1.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>, <span class="co">## use open street map</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                   width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">700</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                   mapbox <span class="op">=</span> <span class="bu">dict</span>(zoom <span class="op">=</span> <span class="fl">11.8</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                   title <span class="op">=</span> <span class="bu">dict</span>(x <span class="op">=</span> <span class="fl">0.5</span>, xanchor <span class="op">=</span> <span class="st">'center'</span>, font <span class="op">=</span> <span class="bu">dict</span>(size <span class="op">=</span> <span class="dv">18</span>)))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>pio.write_html(fig1, <span class="bu">file</span><span class="op">=</span><span class="st">'forest_degree.html'</span>, auto_open<span class="op">=</span><span class="va">False</span>) <span class="co">## save the plot as html file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <iframe src="forest_degree.html" width="120%" height="600px">
 </iframe>
-<div id="c4f8afa0" class="cell" data-execution_count="6">
+<div id="c4f8afa0" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plants <span class="op">=</span> hist.groupby([<span class="st">'long'</span>,<span class="st">'lat'</span>,<span class="st">'year'</span>])[[<span class="st">'treecanopy'</span>,<span class="st">'Herb'</span>,<span class="st">'Litter'</span>,<span class="st">'Shrub'</span>,<span class="st">'Ann_Herb'</span>]].mean().reset_index()</span>
@@ -928,7 +989,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="plants_coverage.html" width="120%" height="600px">
 </iframe>
-<div id="f7820578" class="cell" data-execution_count="7">
+<p>According to the covered soil map and plants coverage map, we could indicate that the bare ground situation did not getting worse in the past 38 years which is an exciting result. However, the plants coverage also remains unchanged which is not a good sign because it is the key factor to prevent the soil erosion in the National Parks. Therefore, we recommend the local government to focus on the bare ground area in the future, especially the northwestern part of the National Parks since there is a lagre area of bare ground which is urgent to protect. At the same time, the government should also pay attention to well covered area which is the key to maintain the ecosystem balance in the National Parks.</p>
+<div id="f7820578" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Citation: https://plotly.com/python/mapbox-county-choropleth/</span></span>
@@ -987,20 +1049,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         
 </div>
 </div>
+<p>According to the plants distribution map, we could find out that the plants distribution in the National Parks is relatively stable in the past 38 years. The tree canopy and herb have relatively even distribution in the National Parks which is a good sign to maintain the ecosystem balance. However, the litter concentrates in the top part of the National Parks which means the nuturients cycling works well in the top part of the National Parks but ineffective in other areas. The shrub coverage is relatively low in the National Parks which is frustrating because it could reduce the soil erosion effectively and provide food and shelter for little animals. For annual herbs, we could find out that only few ares has its distribution with a low coverage which indicates the urgency to protect the annual herbs in the National Parks.</p>
+<p>Therefore, we propose the local government with the following recommendations:</p>
+<ul>
+<li><ol type="1">
+<li>Focus on low coverage area of litter and make some actions to ensure the nuturients cycling works well, such as fertilization.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>Increase the shrub coverage to reduce the soil erosion and protect biodiversity.</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>Protect the annual herbs not only for the biodiversity but also for its economic value such as medicine.</li>
+</ol></li>
+<li><ol start="4" type="1">
+<li>Pay attention to the well covered area to prevent potential forest fire.</li>
+</ol></li>
+</ul>
 </section>
-<section id="drought-condition" class="level2">
-<h2 class="anchored" data-anchor-id="drought-condition">Drought Condition</h2>
-<div id="7825a9e7" class="cell" data-execution_count="8">
+<section id="drought-condition-in-summer" class="level2">
+<h2 class="anchored" data-anchor-id="drought-condition-in-summer">Drought Condition in Summer</h2>
+<div id="7825a9e7" class="cell" data-execution_count="52">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The drought term was defined by the dry soil dats, evaporation and extreme short term dry stress in summer</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Elminate the missing values and get the unified drought value</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>drought_severty <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>, <span class="st">'Evap_Summer'</span>, <span class="st">'NonDrySWA_Summer_whole'</span>]].mean().reset_index()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>drought_severty.fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>drought_severty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Elminate the missing values and get the unified drought value</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>drought_severty <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>, <span class="st">'Evap_Summer'</span>, <span class="st">'NonDrySWA_Summer_whole'</span>]].mean().reset_index()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>drought_severty.fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>drought_severty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="52">
 <div>
 <div>
 
@@ -1125,22 +1202,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="abe0e02c" class="cell" data-execution_count="9">
+<div id="abe0e02c" class="cell" data-execution_count="53">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(hist, geometry<span class="op">=</span>gpd.points_from_xy(hist.<span class="bu">long</span>, hist.lat))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the data into GeoDataFrame</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(hist, geometry<span class="op">=</span>gpd.points_from_xy(hist.<span class="bu">long</span>, hist.lat))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>gdf.plot(column<span class="op">=</span><span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>, legend<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'YlOrRd'</span>, legend_kwds<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">"Dry Stress"</span>, <span class="st">'orientation'</span>: <span class="st">"vertical"</span>})</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Customize the plot</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Summer Dry Stress'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitude'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Summer Dry Stress'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitude'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 1500x1000 with 0 Axes&gt;</code></pre>
@@ -1153,7 +1226,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d92e5aa1" class="cell" data-execution_count="10">
+<p>According to the summer dry stress plot, we could find out that the drought condition depends on the location of longitude and latitude. The lower latitude and higher longitude area has a severe drought condition which is challenging for vegetation coverage.</p>
+<p>Although we could not change the location of areas, we recommend the local government to irrigate the area with severe drought condition to improve the environment for plants growth or plant some drought-resistant plants to maintain the ecosystem balance such as cactus.</p>
+<div id="d92e5aa1" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>figure4 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1176,7 +1251,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="drought_severity.html" width="120%" height="600px">
 </iframe>
-<div id="f5625871" class="cell" data-execution_count="11">
+<p>Based on the summer drought severity map, we could find out that the drought severity was a serious problem in the past 38 years.The drought-stricken area covers <strong><span class="math inline">\(\frac{3}{5}\)</span></strong> of the National Parks most of the time, and has worsened over time. The most recent extreme drought condition happened in 2015. Almost the entire national park is in drought which warns the local government to take actions to prevent the drought condition in the future.</p>
+<p>On the one hand, global warming is the main reason for the drought condition in the National Parks. On the other hand, the lack of vegetation coverage is also a key factor to the drought condition. Therefore, the government should make afforestation and transporation of water to the drought-stricken area to improve the environment for plants growth as soon as possible.</p>
+<div id="f5625871" class="cell" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>figure5 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1199,7 +1276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_evaporation.html" width="120%" height="600px">
 </iframe>
-<div id="331beced" class="cell" data-execution_count="12">
+<p>Interestingly, according to the summer evaporation map, we could see although the vegetation coverage and drought condition of Bears Ears National Monument is relatively good based on previous maps, it has the highest evaporation rate most of time in the past 38 years. This indicates that the evaporation rate may not influence the vegetation coverage. However, compared to 1980, the evaporation rate of the National Parks has an obvious increase in 2018 which may cause potential harm to soil moisture in the future. Therefore, we recommend the local government to take actions such as groudning more plants to control the evaporation rate into a reasonable range to protect the National Parks.</p>
+<div id="331beced" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>figure6 <span class="op">=</span> px.scatter_mapbox(drought_severty,</span>
@@ -1221,16 +1299,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_NonDrySWA.html" width="120%" height="600px">
 </iframe>
+<p>Previously, we have mentioned that the high evaporation rate may cause potential problems to soil in the future. According to the summer non-dry soil water availability map, we could find out that the soil water availability of the National Parks is a serious problem in the past 38 years. Although the Bear Ears National Monument occassionally has a high soil water availability, the overall soil water availability of the National Parks is relatively low which is a challenge for the vegetation coverage in the future. It is crtical for the local government to improve the soil water availability such as mulching and irrigation to protect the National Parks.</p>
 </section>
 <section id="percipitation-and-temperature" class="level2">
 <h2 class="anchored" data-anchor-id="percipitation-and-temperature">Percipitation and Temperature</h2>
-<div id="280cf9c1" class="cell" data-execution_count="13">
+<div id="280cf9c1" class="cell" data-execution_count="57">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ppt <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'PPT_Summer'</span>, <span class="st">'T_Summer'</span>, <span class="st">'PPT_Winter'</span>, <span class="st">'T_Winter'</span>, <span class="st">'FrostDays_Winter'</span>]].mean().reset_index()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ppt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <div>
 <div>
 
@@ -1381,7 +1460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="summer" class="level3">
 <h3 class="anchored" data-anchor-id="summer">Summer</h3>
-<div id="9cf8a64e" class="cell" data-execution_count="14">
+<div id="9cf8a64e" class="cell" data-execution_count="58">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>figure7 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1391,7 +1470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                        size<span class="op">=</span><span class="st">'PPT_Summer'</span>,</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                        animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                        title<span class="op">=</span><span class="st">'Summer Precipitation Over Time'</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'PPT_Summer'</span>: <span class="st">'Precipitation (mm)'</span>},</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'PPT_Summer'</span>: <span class="st">'Precipitation (cm)'</span>},</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                        color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>figure7.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,                      </span>
@@ -1404,7 +1483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_precipitation.html" width="120%" height="600px">
 </iframe>
-<div id="44e17d58" class="cell" data-execution_count="15">
+<div id="44e17d58" class="cell" data-execution_count="59">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>figure8 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1426,10 +1505,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="summer_temperature.html" width="120%" height="600px">
 </iframe>
+<p>According to the summer precipitation map, we could find out that the precipitation of the National Parks is not optimistic in the past 38 years. Most of the time, the precipitation is below 100mm and at least half of the National Parks has a low precipittaion all the time which is a serious problem for the vegetation coverage. In 2018, the precipitation reaches the lowest in the past 38 years which is a serious warning from the nature.</p>
+<p>At the same time, according to the summer tempature map, the temperature of the National Parks has an obvious increase in the past 38 years. Until 2018, the highest temperature in summmer reaches 25 celcius degree which is a serious warning from the nature. The higher tempature incrase the evaporation rate and reduce the soil water availability which is a challenge for the vegetation coverage. Therefore, despite the impact of global warming, the local government should effectively introduce human intervention to increase the precipitation and decrease the tempature in the National Parks such as cloud seeding and transplanting drought-resistant plants.</p>
 </section>
 <section id="winter" class="level3">
 <h3 class="anchored" data-anchor-id="winter">Winter</h3>
-<div id="6f232782" class="cell" data-execution_count="16">
+<div id="6f232782" class="cell" data-execution_count="60">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>figure9 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1439,7 +1520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                        size<span class="op">=</span><span class="st">'PPT_Winter'</span>,</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                        animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                        title<span class="op">=</span><span class="st">'Winter Precipitation Over Time'</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'PPT_Winter'</span>: <span class="st">'Precipitation (mm)'</span>},</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'PPT_Winter'</span>: <span class="st">'Precipitation (cm)'</span>},</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                        color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span>)</span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>figure9.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,</span>
@@ -1452,7 +1533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="winter_precipitation.html" width="120%" height="600px">
 </iframe>
-<div id="6d9ca058" class="cell" data-execution_count="17">
+<div id="6d9ca058" class="cell" data-execution_count="61">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>figure10 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1474,7 +1555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="winter_temperature.html" width="120%" height="600px">
 </iframe>
-<div id="4550bedb" class="cell" data-execution_count="18">
+<div id="4550bedb" class="cell" data-execution_count="62">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>figure11 <span class="op">=</span> px.scatter_mapbox(ppt,</span>
@@ -1498,18 +1579,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="winter_frost_days.html" width="120%" height="600px">
 </iframe>
+<p>According to the winter precipitation, tempature and winter frost days maps, we could find that the Bear Ears National Monument has a relatively high precipitation and low temperature compared to the other areas which is a good sign for the vegetation coverage. The high precipitation and low temperature could improve non-dry soil water availability and reduce the evaporation rate which is good for the vegetation coverage. With more frost days, the pests and diseases could be reduced and water availability could be improved which is also good for the vegetation coverage.</p>
 </section>
 </section>
 <section id="water-capacity-in-soil" class="level2">
 <h2 class="anchored" data-anchor-id="water-capacity-in-soil">Water Capacity in Soil</h2>
-<div id="c1cf95eb" class="cell" data-execution_count="19">
+<div id="c1cf95eb" class="cell" data-execution_count="63">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>vwc <span class="op">=</span> hist.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'VWC_Spring_whole'</span>, <span class="st">'VWC_Summer_whole'</span>, <span class="st">'VWC_Fall_whole'</span>, <span class="st">'VWC_Winter_whole'</span>]].mean().reset_index()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>vwc[<span class="st">'vwc_total'</span>] <span class="op">=</span> vwc[<span class="st">'VWC_Spring_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Summer_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Fall_whole'</span>] <span class="op">+</span> vwc[<span class="st">'VWC_Winter_whole'</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>vwc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 <div>
 
@@ -1658,7 +1740,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="6d7797a3" class="cell" data-execution_count="20">
+<div id="6d7797a3" class="cell" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>figure12 <span class="op">=</span> px.scatter_mapbox(vwc,</span>
@@ -1681,13 +1763,489 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <iframe src="total_vwc.html" width="120%" height="600px">
 </iframe>
+<p>According to the water capacity in soil map, we could find out that the east area of the National Parks has a relatively high water capacity. On the one hand, the east area contains more plants and litter for better nuturients cycling which could improve the water capacity in soil. On the other hand, the east area has a relatively low evaporation rate and high precipitation which could improve the water capacity in soil either. Therefore, the local government should focus on protecting the diverse vegetation coverage in the east area to maintain the ecosystem balance and introduce more plants to the west area to create a better ecological circulation system in the National Parks.</p>
 </section>
 </section>
 <section id="future-predictions" class="level1">
 <h1>Future Predictions</h1>
+<section id="plants-coverage-area-1" class="level3">
+<h3 class="anchored" data-anchor-id="plants-coverage-area-1">Plants Coverage Area</h3>
+<div id="cell-53" class="cell" data-execution_count="65">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nt[<span class="st">'coverage_degree'</span>] <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> nt[<span class="st">'Bare'</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>coverage_degree_nt <span class="op">=</span> nt.groupby([<span class="st">'long'</span>,<span class="st">'lat'</span>,<span class="st">'year'</span>])[<span class="st">'coverage_degree'</span>].mean().reset_index()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>coverage_degree_nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">long</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">coverage_degree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2021</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2022</td>
+<td>16.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2023</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2024</td>
+<td>16.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-110.0461</td>
+<td>37.60334</td>
+<td>2021</td>
+<td>23.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">447</td>
+<td>-109.9662</td>
+<td>37.63159</td>
+<td>2024</td>
+<td>71.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">448</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2021</td>
+<td>63.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">449</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2022</td>
+<td>63.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">450</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2023</td>
+<td>63.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">451</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2024</td>
+<td>63.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>452 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-54" class="cell" data-execution_count="66">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>figure13 <span class="op">=</span> px.scatter_mapbox(coverage_degree_nt,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                        lat<span class="op">=</span><span class="st">'lat'</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                        lon<span class="op">=</span><span class="st">'long'</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                        color<span class="op">=</span><span class="st">'coverage_degree'</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                        size<span class="op">=</span><span class="st">'coverage_degree'</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                        animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                        title<span class="op">=</span><span class="st">'Predicted Covered Soil Percentage Over Time'</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'coverage_degree'</span>: <span class="st">'Coverage (%)'</span>},</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                        color_continuous_scale<span class="op">=</span><span class="st">'RdYlGn'</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>figure13.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                        width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">700</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                        mapbox <span class="op">=</span> <span class="bu">dict</span>(zoom <span class="op">=</span> <span class="fl">11.8</span>),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                        title <span class="op">=</span> <span class="bu">dict</span>(x <span class="op">=</span> <span class="fl">0.5</span>, xanchor <span class="op">=</span> <span class="st">'center'</span>, font <span class="op">=</span> <span class="bu">dict</span>(size <span class="op">=</span> <span class="dv">18</span>)))</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>pio.write_html(figure13, <span class="bu">file</span><span class="op">=</span><span class="st">'forest_degree_nt.html'</span>, auto_open<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="forest_degree_nt.html" width="120%" height="600px">
+</iframe>
+</section>
+<section id="drought-condition-in-summer-1" class="level3">
+<h3 class="anchored" data-anchor-id="drought-condition-in-summer-1">Drought Condition in Summer</h3>
+<div id="cell-57" class="cell" data-execution_count="68">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>drought_severty_nt <span class="op">=</span> nt.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>]].mean().reset_index()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>drought_severty_nt.fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>drought_severty_nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="68">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">long</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">ExtremeShortTermDryStress_Summer_whole</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2021</td>
+<td>36.243550</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2022</td>
+<td>37.127150</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2023</td>
+<td>36.629400</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2024</td>
+<td>37.311425</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-110.0461</td>
+<td>37.60334</td>
+<td>2021</td>
+<td>36.241600</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">447</td>
+<td>-109.9662</td>
+<td>37.63159</td>
+<td>2024</td>
+<td>35.329175</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">448</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2021</td>
+<td>35.496150</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">449</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2022</td>
+<td>36.342475</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">450</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2023</td>
+<td>35.875700</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">451</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2024</td>
+<td>36.564650</td>
+</tr>
+</tbody>
+</table>
+
+<p>452 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-58" class="cell" data-execution_count="69">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>figure14 <span class="op">=</span> px.scatter_mapbox(drought_severty_nt,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                        lat<span class="op">=</span><span class="st">'lat'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                        lon<span class="op">=</span><span class="st">'long'</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                        color<span class="op">=</span><span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        size<span class="op">=</span><span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                        animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                        title<span class="op">=</span><span class="st">'Predicted Summer Drought Severity Over Time'</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'ExtremeShortTermDryStress_Summer_whole'</span>: <span class="st">'Drought Severity (Days)'</span>},</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                        color_continuous_scale<span class="op">=</span><span class="st">'YlOrRd'</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>figure14.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                        width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">700</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                        mapbox <span class="op">=</span> <span class="bu">dict</span>(zoom <span class="op">=</span> <span class="fl">11.8</span>),</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                        title <span class="op">=</span> <span class="bu">dict</span>(x <span class="op">=</span> <span class="fl">0.5</span>, xanchor <span class="op">=</span> <span class="st">'center'</span>, font <span class="op">=</span> <span class="bu">dict</span>(size <span class="op">=</span> <span class="dv">18</span>)))</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>pio.write_html(figure14, <span class="bu">file</span><span class="op">=</span><span class="st">'drought_severity_nt.html'</span>, auto_open<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="drought_severity_nt.html" width="120%" height="600px">
+</iframe>
+</section>
+<section id="water-capacity-in-soil-1" class="level3">
+<h3 class="anchored" data-anchor-id="water-capacity-in-soil-1">Water Capacity in Soil</h3>
+<div id="cell-61" class="cell" data-execution_count="70">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>vwc_nt <span class="op">=</span> nt.groupby([<span class="st">'long'</span>, <span class="st">'lat'</span>, <span class="st">'year'</span>])[[<span class="st">'VWC_Spring_whole'</span>, <span class="st">'VWC_Summer_whole'</span>, <span class="st">'VWC_Fall_whole'</span>, <span class="st">'VWC_Winter_whole'</span>]].mean().reset_index()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>vwc_nt[<span class="st">'vwc_total'</span>] <span class="op">=</span> vwc_nt[<span class="st">'VWC_Spring_whole'</span>] <span class="op">+</span> vwc_nt[<span class="st">'VWC_Summer_whole'</span>] <span class="op">+</span> vwc_nt[<span class="st">'VWC_Fall_whole'</span>] <span class="op">+</span> vwc_nt[<span class="st">'VWC_Winter_whole'</span>]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>vwc_nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="70">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">long</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">VWC_Spring_whole</th>
+<th data-quarto-table-cell-role="th">VWC_Summer_whole</th>
+<th data-quarto-table-cell-role="th">VWC_Fall_whole</th>
+<th data-quarto-table-cell-role="th">VWC_Winter_whole</th>
+<th data-quarto-table-cell-role="th">vwc_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2021</td>
+<td>0.079946</td>
+<td>0.043854</td>
+<td>0.069624</td>
+<td>0.107414</td>
+<td>0.300837</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2022</td>
+<td>0.073774</td>
+<td>0.043627</td>
+<td>0.064558</td>
+<td>0.096963</td>
+<td>0.278922</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2023</td>
+<td>0.074737</td>
+<td>0.045808</td>
+<td>0.073736</td>
+<td>0.096603</td>
+<td>0.290884</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-110.0472</td>
+<td>37.60413</td>
+<td>2024</td>
+<td>0.076683</td>
+<td>0.044606</td>
+<td>0.071446</td>
+<td>0.103206</td>
+<td>0.295942</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-110.0461</td>
+<td>37.60334</td>
+<td>2021</td>
+<td>0.076240</td>
+<td>0.049835</td>
+<td>0.074519</td>
+<td>0.109809</td>
+<td>0.310403</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">447</td>
+<td>-109.9662</td>
+<td>37.63159</td>
+<td>2024</td>
+<td>0.177581</td>
+<td>0.093348</td>
+<td>0.128599</td>
+<td>0.176967</td>
+<td>0.576495</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">448</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2021</td>
+<td>0.165313</td>
+<td>0.090073</td>
+<td>0.112189</td>
+<td>0.160926</td>
+<td>0.528502</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">449</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2022</td>
+<td>0.150184</td>
+<td>0.088723</td>
+<td>0.108535</td>
+<td>0.148687</td>
+<td>0.496129</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">450</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2023</td>
+<td>0.150300</td>
+<td>0.090550</td>
+<td>0.119412</td>
+<td>0.148124</td>
+<td>0.508385</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">451</td>
+<td>-109.9659</td>
+<td>37.62525</td>
+<td>2024</td>
+<td>0.159810</td>
+<td>0.090228</td>
+<td>0.114041</td>
+<td>0.158923</td>
+<td>0.523002</td>
+</tr>
+</tbody>
+</table>
+
+<p>452 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-62" class="cell" data-execution_count="71">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>figure15 <span class="op">=</span> px.scatter_mapbox(vwc_nt,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        lat<span class="op">=</span><span class="st">'lat'</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                        lon<span class="op">=</span><span class="st">'long'</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                        color<span class="op">=</span><span class="st">'VWC_Spring_whole'</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                        size<span class="op">=</span><span class="st">'VWC_Spring_whole'</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                        animation_frame<span class="op">=</span><span class="st">'year'</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                        title<span class="op">=</span><span class="st">'Predicted Annual Volumetric Water Content Over Time'</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                        labels<span class="op">=</span>{<span class="st">'VWC_Spring_whole'</span>: <span class="st">'Water (m³)'</span>},</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                        color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>figure15.update_layout(mapbox_style<span class="op">=</span><span class="st">"open-street-map"</span>,                       </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                        width <span class="op">=</span> <span class="dv">800</span>, height <span class="op">=</span> <span class="dv">700</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                        mapbox <span class="op">=</span> <span class="bu">dict</span>(zoom <span class="op">=</span> <span class="fl">11.8</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                        title <span class="op">=</span> <span class="bu">dict</span>(x <span class="op">=</span> <span class="fl">0.5</span>, xanchor <span class="op">=</span> <span class="st">'center'</span>, font <span class="op">=</span> <span class="bu">dict</span>(size <span class="op">=</span> <span class="dv">18</span>)))</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>pio.write_html(figure15, <span class="bu">file</span><span class="op">=</span><span class="st">'total_vwc_nt.html'</span>, auto_open<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="total_vwc_nt.html" width="120%" height="600px">
+</iframe>
+<p>By comparing the historical data with the future predictions, we could find out that the future predictions are optimistic in bare ground area coverage and water capacity in soil. At least half of areas would not be confused by the extreme soil erosion and lack of water capacity in soil. However, the plants coverage area and drought condition in summer are still a challenge for the National Parks. This indicates that the drought condition improvement is a long-term project which needs the local government to invest more resources to handle it.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The project provides the local government with the historical data and future predictions of the vegetation coverage and the basic environment information in the Southeastern Utah Group National Parks. According to analysis of historical vegetation coverage, drought condition, precipitation, temperature and water capacity in soil, we could indicate that the dynamics of ecosystem in National Parks are greatly influenced by the climate change. The precipitation and temperature are the initial factors to influence the evaporation rate, soil water availability and drought condition in the National Parks. Based on the future predictions, although the National Parks are facing the challenge of drought, extreme temperature and low precipitation, the self-recovery ability of its ecosystem is still optimistic.</p>
+<p>Therefore, in order to protect the National Parks, we propose the following recommendations for the local government:</p>
+<ul>
+<li><ol type="1">
+<li>The vegetation coverage is the key factor to prevent the soil erosion and build ecosystem cycling in the National Parks. The local government should plant more plants artificially to improve the efficiency of vegetation coverage.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>The drought condition is a serious problem in the National Parks. The local government should irrigate the drought-stricken area and plant some drought-resistant plants to improve the environment for plants growth.</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>The precipitation and temperature are the initial factors to influence the evaporation rate, soil water availability and drought condition in the National Parks. Human intervention,such as cloud seeding and transplanting drought-resistant plants, is necessary to adjust the ecosystem of National Parks</li>
+</ol></li>
+</ul>
+<section id="here-is-the-link-to-the-code-the-dynamic-of-plants-with-climate-change-all-code-and-maps-are-in-doc-folder." class="level5 unnumbered">
+
+
+</section>
+</section>
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Here is the link to the code: The Dynamic of Plants with Climate Change, all code and maps are in doc folder.</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hartsell2022climate" class="csl-entry" role="listitem">
+Hartsell, J. A., D. R. Schlaepfer, and J. B. Bradford. 2022. <span>“Climate and Drought Adaptation: Historical and Projected Future Exposure Metrics for Southeastern Utah Group National Parks.”</span> U.S. Geological Survey. <a href="https://doi.org/10.5066/P9O0FBVY">https://doi.org/10.5066/P9O0FBVY</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
